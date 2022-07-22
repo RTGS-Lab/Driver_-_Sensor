@@ -7,6 +7,7 @@ namespace BusType {
 	constexpr uint8_t NONE = 0; 
 	constexpr uint8_t I2C = 1;
 	constexpr uint8_t SDI12 = 2;
+	constexpr uint8_t CORE = 3; ///<You don't exist; you were never even born. Anonymity is your name. Silence your native tongue. You're no longer part of the System.
 };
 
 class Sensor
@@ -77,7 +78,8 @@ class Sensor
 		virtual bool isPresent() {
 			return false;
 		}; 
-		uint8_t sensorInterface = BusType::NONE;
+		uint8_t sensorInterface = BusType::NONE; ///<Defines which type of interface a given sensor uses
+		bool keepPowered = false; ///<Specify if power should be retained for a sensor when shutting the system down
 	protected:
 		constexpr static int MAX_NUM_ERRORS = 10; ///<Maximum number of errors to log before overwriting previous errors in buffer
 		const uint32_t SENSOR_PORT_RANGE_ERROR = 0x90010100; //FIX! 
