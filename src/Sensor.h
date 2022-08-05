@@ -31,6 +31,7 @@ class Sensor
 			return "{}"; //return empty string if function is not implemented by device 
 		};
 		virtual String selfDiagnostic(uint8_t diagnosticLevel, time_t time) {
+			if(getSensorPort() == 0) throwError(FIND_FAIL); //If no port found, report failure
 			return "{}"; //return empty string if function is not implemented by device 
 		};
 		// virtual bool isTalon() {
@@ -84,6 +85,7 @@ class Sensor
 		constexpr static int MAX_NUM_ERRORS = 10; ///<Maximum number of errors to log before overwriting previous errors in buffer
 		const uint32_t SENSOR_PORT_RANGE_ERROR = 0x90010100; //FIX! 
 		const uint32_t TALON_PORT_RANGE_ERROR = 0x90010200; //FIX! 
+		const uint32_t FIND_FAIL = 0xFF000000; ///<Fail to locate sensor in system
 		uint8_t talonPort = 255; //Used to keep track of which port the Talon is connected to on Kestrel
 		uint8_t sensorPort = 255; //Used to keep track of which port the sensor is connected to on associated Talon
 		uint32_t talonPortErrorCode = 0; //Used to easily OR with error codes to add the Talon port
