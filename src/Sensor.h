@@ -15,7 +15,7 @@ class Sensor
 	
 	public:
 		// Sensor();
-		virtual String begin(time_t time, bool &criticalFault, bool &fault);
+		virtual String begin(time_t time, bool &criticalFault, bool &fault) = 0;
 		
 		virtual String getErrors() {
 			return "{}"; //DEBUG!
@@ -75,9 +75,6 @@ class Sensor
 			if(talonPort >= 0 && talonPort < 255) return String(talonPort + 1); //If sensor port has been set //FIX max value
 			else return "null";
 		}
-		virtual bool isPresent() {
-			return false;
-		}; 
 		uint8_t sensorInterface = BusType::NONE; ///<Defines which type of interface a given sensor uses
 		bool keepPowered = false; ///<Specify if power should be retained for a sensor when shutting the system down
 	protected:
