@@ -18,21 +18,21 @@ class Sensor
 		virtual String begin(time_t time, bool &criticalFault, bool &fault);
 		
 		virtual String getErrors() {
-			return "{}"; //DEBUG!
+			return ""; //DEBUG!
 		}
 		virtual uint8_t totalErrors() {
 			// return 0; //DEBUG!
 			return numErrors;
 		}
 		virtual String getData(time_t time) {
-			return "{}"; //Return empty string if function is not implemented by device 
+			return ""; //Return empty string if function is not implemented by device 
 		};
 		virtual String getMetadata() {
-			return "{}"; //return empty string if function is not implemented by device 
+			return ""; //return empty string if function is not implemented by device 
 		};
 		virtual String selfDiagnostic(uint8_t diagnosticLevel, time_t time) {
 			if(getSensorPort() == 0) throwError(FIND_FAIL); //If no port found, report failure
-			return "{}"; //return empty string if function is not implemented by device 
+			return ""; //return empty string if function is not implemented by device 
 		};
 		// virtual bool isTalon() {
 		// 	return false; //Default to not
