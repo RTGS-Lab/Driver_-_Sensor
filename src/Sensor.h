@@ -10,6 +10,14 @@ namespace BusType {
 	constexpr uint8_t CORE = 3; ///<You don't exist; you were never even born. Anonymity is your name. Silence your native tongue. You're no longer part of the System.
 };
 
+namespace PowerSaveModes {
+	constexpr uint8_t PERFROMANCE = 0;
+	constexpr uint8_t BALANCED = 1; 
+	constexpr uint8_t LOW_POWER = 2;
+	constexpr uint8_t ULTRA_LOW_POWER = 3;
+	constexpr uint8_t EMERGENCY = 255; 
+};
+
 class Sensor
 {
 	
@@ -79,8 +87,20 @@ class Sensor
 		virtual bool isPresent() {
 			return false;
 		}; 
+
+		virtual int sleep() {
+			return -1; //DEBUG!
+		};
+		virtual int wake() {
+			// bool dummy1;
+			// bool dummy2;
+			// begin(0, dummy1, dummy2); //DEBUG!
+			return -1; //DEBUG!
+		}; 
+		
 		uint8_t sensorInterface = BusType::NONE; ///<Defines which type of interface a given sensor uses
 		bool keepPowered = false; ///<Specify if power should be retained for a sensor when shutting the system down
+		int powerSaveMode = 0; ///<Specify what power save mode should be used
 	protected:
 		constexpr static int MAX_NUM_ERRORS = 10; ///<Maximum number of errors to log before overwriting previous errors in buffer
 		const uint32_t SENSOR_PORT_RANGE_ERROR = 0x90010100; //FIX! 
