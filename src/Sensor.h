@@ -50,7 +50,7 @@ class Sensor
 		void setTalonPort(uint8_t port)
 		{
 			// if(port_ > numPorts || port_ == 0) throwError(PORT_RANGE_ERROR | portErrorCode); //If commanded value is out of range, throw error 
-			if(port > 4 || port == 0) throwError(TALON_PORT_RANGE_ERROR | talonPortErrorCode | sensorPortErrorCode); //If commanded value is out of range, throw error //FIX! How to deal with magic number? This is the number of ports on KESTREL, how do we know that??
+			if(port > 4 || port == 0) throwError(TALON_PORT_RANGE_FAIL | talonPortErrorCode | sensorPortErrorCode); //If commanded value is out of range, throw error //FIX! How to deal with magic number? This is the number of ports on KESTREL, how do we know that??
 			else { //If in range, update the port values
 				talonPort = port - 1; //Set global port value in index counting
 				talonPortErrorCode = (talonPort + 1) << 4; //Set port error code in rational counting 
@@ -59,7 +59,7 @@ class Sensor
 		void setSensorPort(uint8_t port)
 		{
 			// if(port_ > numPorts || port_ == 0) throwError(PORT_RANGE_ERROR | portErrorCode); //If commanded value is out of range, throw error 
-			if(port > 4 || port == 0) throwError(SENSOR_PORT_RANGE_ERROR | talonPortErrorCode | sensorPortErrorCode); //If commanded value is out of range, throw error //FIX! How to deal with magic number? This is the number of ports on KESTREL, how do we know that??
+			if(port > 4 || port == 0) throwError(SENSOR_PORT_RANGE_FAIL | talonPortErrorCode | sensorPortErrorCode); //If commanded value is out of range, throw error //FIX! How to deal with magic number? This is the number of ports on KESTREL, how do we know that??
 			else { //If in range, update the port values
 				sensorPort = port - 1; //Set global port value in index counting
 				sensorPortErrorCode = (sensorPort + 1); //Set port error code in rational counting 
@@ -83,8 +83,8 @@ class Sensor
 		bool keepPowered = false; ///<Specify if power should be retained for a sensor when shutting the system down
 	protected:
 		constexpr static int MAX_NUM_ERRORS = 10; ///<Maximum number of errors to log before overwriting previous errors in buffer
-		const uint32_t SENSOR_PORT_RANGE_ERROR = 0x90010100; //FIX! 
-		const uint32_t TALON_PORT_RANGE_ERROR = 0x90010200; //FIX! 
+		const uint32_t SENSOR_PORT_RANGE_FAIL = 0x90010100; //FIX! 
+		const uint32_t TALON_PORT_RANGE_FAIL = 0x90010200; //FIX! 
 		const uint32_t FIND_FAIL = 0xFF000000; ///<Fail to locate sensor in system
 		uint8_t talonPort = 255; //Used to keep track of which port the Talon is connected to on Kestrel
 		uint8_t sensorPort = 255; //Used to keep track of which port the sensor is connected to on associated Talon
@@ -94,6 +94,7 @@ class Sensor
 		uint8_t numErrors = 0; //Used to track the index of errors array
 		bool errorOverwrite = false; //Used to track if errors have been overwritten in time since last report
 		bool timeBaseGood = false; //Used to keep track of the valitity of the current timebase
+		bool initDone = false; //Used to keep track if the initaliztion has run - used by hasReset() 
 		int throwError(uint32_t error)
 		{
 			bool errorExists = false; //Check if error has already been reported 
