@@ -86,6 +86,7 @@ class Sensor
 		const uint32_t SENSOR_PORT_RANGE_FAIL = 0x90010100; //FIX! 
 		const uint32_t TALON_PORT_RANGE_FAIL = 0x90010200; //FIX! 
 		const uint32_t FIND_FAIL = 0xFF000000; ///<Fail to locate sensor in system
+		const uint32_t DETECT_FAIL = 0xED000000; ///<Fail to detect sensor at specified location
 		uint8_t talonPort = 255; //Used to keep track of which port the Talon is connected to on Kestrel
 		uint8_t sensorPort = 255; //Used to keep track of which port the sensor is connected to on associated Talon
 		uint32_t talonPortErrorCode = 0; //Used to easily OR with error codes to add the Talon port
