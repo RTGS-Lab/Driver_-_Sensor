@@ -107,6 +107,8 @@ class Sensor
 		const uint32_t TALON_PORT_RANGE_FAIL = 0x90010200; //FIX! 
 		const uint32_t FIND_FAIL = 0xFF000000; ///<Fail to locate sensor in system
 		const uint32_t DETECT_FAIL = 0xED000000; ///<Fail to detect sensor at specified location
+		const uint32_t EXCEED_COLLECT_TIME = 0xE0040000; ///<Expected time for data/diagnostic/metadata collection exceeded
+		const unsigned long collectMax = 60000; //Allow for a max of 60 seconds for collecting info from sensor itself (1 = data, 2 = diagnostic, 3 = metadata)
 		uint8_t talonPort = 255; //Used to keep track of which port the Talon is connected to on Kestrel
 		uint8_t sensorPort = 255; //Used to keep track of which port the sensor is connected to on associated Talon
 		uint32_t talonPortErrorCode = 0; //Used to easily OR with error codes to add the Talon port
