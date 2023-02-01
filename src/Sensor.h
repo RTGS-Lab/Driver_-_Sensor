@@ -95,6 +95,7 @@ class Sensor
 			// bool dummy1;
 			// bool dummy2;
 			// begin(0, dummy1, dummy2); //DEBUG!
+			wakeTime = millis(); 
 			return -1; //DEBUG!
 		}; 
 		
@@ -108,6 +109,7 @@ class Sensor
 		const uint32_t FIND_FAIL = 0xFF000000; ///<Fail to locate sensor in system
 		const uint32_t DETECT_FAIL = 0xED000000; ///<Fail to detect sensor at specified location
 		const uint32_t EXCEED_COLLECT_TIME = 0xE0040000; ///<Expected time for data/diagnostic/metadata collection exceeded
+		const uint32_t SENSOR_TIMEOUT = 0xF1000000; ///<Attempt to read sensor timed out
 		const unsigned long collectMax = 60000; //Allow for a max of 60 seconds for collecting info from sensor itself (1 = data, 2 = diagnostic, 3 = metadata)
 		uint8_t talonPort = 255; //Used to keep track of which port the Talon is connected to on Kestrel
 		uint8_t sensorPort = 255; //Used to keep track of which port the sensor is connected to on associated Talon
@@ -115,6 +117,7 @@ class Sensor
 		uint32_t sensorPortErrorCode = 0; //Used to easily OR with error codes to add the Sensor port
 		uint32_t errors[MAX_NUM_ERRORS] = {0};
 		uint8_t numErrors = 0; //Used to track the index of errors array
+		time_t wakeTime = 0; //Used to keep track of when the sensor woke up last
 		bool errorOverwrite = false; //Used to track if errors have been overwritten in time since last report
 		bool timeBaseGood = false; //Used to keep track of the valitity of the current timebase
 		bool initDone = false; //Used to keep track if the initaliztion has run - used by hasReset() 
