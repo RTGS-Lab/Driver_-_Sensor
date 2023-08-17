@@ -111,6 +111,7 @@ class Sensor
 		const uint32_t EXCEED_COLLECT_TIME = 0xE0040000; ///<Expected time for data/diagnostic/metadata collection exceeded
 		const uint32_t SENSOR_TIMEOUT = 0xF1000000; ///<Attempt to read sensor timed out
 		const uint32_t I2C_SENSOR_COM_FAIL = 0xF12C0000; ///<Error has occored in comunication with I2C sensor
+		const uint32_t REPEATED_READ_ATTEMPT = 0xF1010000; ///<It took more than one read attempt to get a value from this sensor
 		const unsigned long collectMax = 60000; //Allow for a max of 60 seconds for collecting info from sensor itself (1 = data, 2 = diagnostic, 3 = metadata)
 		uint8_t talonPort = 255; //Used to keep track of which port the Talon is connected to on Kestrel
 		uint8_t sensorPort = 255; //Used to keep track of which port the sensor is connected to on associated Talon
