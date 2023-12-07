@@ -1,3 +1,5 @@
+//© 2023 Regents of the University of Minnesota. All rights reserved.
+
 #ifndef Sensor_h
 #define Sensor_h
 
