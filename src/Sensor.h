@@ -13,7 +13,7 @@ namespace BusType {
 };
 
 namespace PowerSaveModes {
-	constexpr uint8_t PERFROMANCE = 0;
+	constexpr uint8_t PERFORMANCE = 0;
 	constexpr uint8_t BALANCED = 1; 
 	constexpr uint8_t LOW_POWER = 2;
 	constexpr uint8_t ULTRA_LOW_POWER = 3;
