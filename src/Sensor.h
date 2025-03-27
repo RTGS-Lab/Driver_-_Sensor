@@ -24,8 +24,10 @@ class Sensor
 {
 	
 	public:
-		// Sensor();
-		virtual String begin(time_t time, bool &criticalFault, bool &fault);
+		Sensor() {}
+		virtual String begin(time_t time, bool &criticalFault, bool &fault) {
+			return ""; //DEBUG! Return empty string if function is not implemented by device
+		};
 		
 		virtual String getErrors() {
 			return ""; //DEBUG!
