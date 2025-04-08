@@ -36,13 +36,13 @@ class Sensor
 			// return 0; //DEBUG!
 			return numErrors;
 		}
-		virtual std::string getData(time_t time) {
+		virtual String getData(time_t time) {
 			return ""; //Return empty string if function is not implemented by device 
 		};
-		virtual std::string getMetadata() {
+		virtual String getMetadata() {
 			return ""; //return empty string if function is not implemented by device 
 		};
-		virtual std::string selfDiagnostic(uint8_t diagnosticLevel, time_t time) {
+		virtual String selfDiagnostic(uint8_t diagnosticLevel, time_t time) {
 			if(getSensorPort() == 0) throwError(FIND_FAIL); //If no port found, report failure
 			return ""; //return empty string if function is not implemented by device 
 		};
@@ -77,13 +77,13 @@ class Sensor
 				sensorPortErrorCode = (sensorPort + 1); //Set port error code in rational counting 
 			}
 		}
-		std::string getSensorPortString()
+		String getSensorPortString()
 		{
 			if(sensorPort >= 0 && sensorPort < 255) return String(sensorPort + 1); //If sensor port has been set //FIX max value
 			else return "null";
 		}
 
-		std::string getTalonPortString()
+		String getTalonPortString()
 		{
 			if(talonPort >= 0 && talonPort < 255) return String(talonPort + 1); //If sensor port has been set //FIX max value
 			else return "null";
