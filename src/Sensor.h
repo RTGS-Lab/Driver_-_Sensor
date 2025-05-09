@@ -4,6 +4,7 @@
 #define Sensor_h
 
 #include <Particle.h>
+#include "ITimeProvider.h"
 
 namespace BusType {
 	constexpr uint8_t NONE = 0; 
@@ -24,8 +25,10 @@ class Sensor
 {
 	
 	public:
-		// Sensor();
-		virtual String begin(time_t time, bool &criticalFault, bool &fault);
+		Sensor() {}
+		virtual String begin(time_t time, bool &criticalFault, bool &fault) {
+			return ""; //DEBUG! Return empty string if function is not implemented by device
+		};
 		
 		virtual String getErrors() {
 			return ""; //DEBUG!
@@ -93,11 +96,11 @@ class Sensor
 		virtual int sleep() {
 			return -1; //DEBUG!
 		};
-		virtual int wake() {
+		virtual int wake(ITimeProvider& timeProvider) {
 			// bool dummy1;
 			// bool dummy2;
 			// begin(0, dummy1, dummy2); //DEBUG!
-			wakeTime = millis(); 
+			wakeTime = timeProvider.millis(); 
 			return -1; //DEBUG!
 		}; 
 		
